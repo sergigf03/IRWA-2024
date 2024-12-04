@@ -20,7 +20,6 @@ This project aims to create a search engine based on a given query and display t
 ## Requirements
 - Python 3.x
 - Flask
-- Other dependencies listed in `requirements.txt`.
 
 ## Running the Application
 python web_app.py
