@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block page_title %}{{ page_title }}{% endblock %}
+{% block content %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Analytics - Web Search Engine</title>
+    </head>
+    <body>
+        <h1>Web Search Engine Analytics</h1>
+
+        <!-- Click Data -->
+        <h2>Document Clicks</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Document ID</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Click Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for doc in clicks_data %}
+                <tr>
+                    <td>{{ doc.id }}</td>
+                    <td>{{ doc.title }}</td>
+                    <td>{{ doc.description }}</td>
+                    <td>{{ doc.count }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Query Data -->
+        <h2>Search Query Statistics</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Query ID</th>
+                    <th>Terms</th>
+                    <th>Number of Terms</th>
+                    <th>Timestamp</th>
+                    <th>Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for query in query_stats %}
+                <tr>
+                    <td>{{ query.query_id }}</td>
+                    <td>{{ query.terms }}</td>
+                    <td>{{ query.num_terms }}</td>
+                    <td>{{ query.timestamp }}</td>
+                    <td>{{ query.count }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Session Data -->
+        <h2>Session Statistics</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Session ID</th>
+                    <th>Browser</th>
+                    <th>OS</th>
+                    <th>IP</th>
+                    <th>Country</th>
+                    <th>Start Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for session in session_stats %}
+                <tr>
+                    <td>{{ session.session_id }}</td>
+                    <td>{{ session.browser }}</td>
+                    <td>{{ session.os }}</td>
+                    <td>{{ session.ip }}</td>
+                    <td>{{ session.country }}</td>
+                    <td>{{ session.start_time }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        
+    </body>
+    </html>
+
+{% endblock %}

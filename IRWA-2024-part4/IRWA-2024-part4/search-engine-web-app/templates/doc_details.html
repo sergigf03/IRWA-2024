@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    {{ page_title }}
+{% endblock %}
+
+{% block content %}
+    
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Document Detail - IRWA Search Engine</title>
+    </head>
+    <body>
+        <h1>{{ result.title }}</h1>
+        <p><strong>Description:</strong> {{ result.description }}</p>
+        <p><strong>Date:</strong> {{ result.doc_date }}</p>
+        <p><strong>Likes:</strong> {{ result.likes }}</p>
+        <p><strong>Retweets:</strong> {{ result.retweets }}</p>
+        <p><strong>Hashtags:</strong> {{ result.hashtags | join(", ") }}</p>
+        <p><strong>URL:</strong> <a href="{{ result.url }}" target="_blank">{{ result.url }}</a></p>
+        <div><a href="#" onclick="history.go(-1)">Go Back</a></div>
+        <div><a href="#" onclick="history.go(-2)">Go Back 2 pages</a></div>
+        <div><a href="#" onclick="history.go(-3)">Go Back 3 pages</a></div>
+        <div><a href="#" onclick="history.go(-4)">Go Back 4 pages</a></div>
+        <div><a href="/stats" >Stats</a></div>
+        <div><a href="/dashboard" >Dashboard</a></div>
+    </body>
+    </html>
+{% endblock %}

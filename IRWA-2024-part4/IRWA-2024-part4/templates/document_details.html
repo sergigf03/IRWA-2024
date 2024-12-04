@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ tweet_info['Tweet'] }}</title>
+</head>
+<body>
+    <h1>{{ tweet_info['Tweet'] }}</h1>
+    <p><strong>Full Tweet:</strong> {{ tweet_info['Tweet'] }}</p>
+    <p><strong>Date:</strong> {{ tweet_info['Date'] }}</p>
+    <p><strong>Likes:</strong> {{ tweet_info['Likes'] }}</p>
+    <p><strong>Retweets:</strong> {{ tweet_info['Retweets'] }}</p>
+    <p><strong>Hashtags:</strong> {{ tweet_info['Hashtags'] }}</p>
+    <p><strong>URL:</strong> <a href="{{ tweet_info['Url'] }}" target="_blank">{{ tweet_info['Url'] }}</a></p>
+    <a href="/">Back to Search</a>
+</body>
+</html>

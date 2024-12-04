@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block page_title %}Dashboard{% endblock %}
+
+{% block header %}
+    <!-- Next tag loads Charts.js https://www.chartjs.org/docs/latest/ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.2/chart.min.js"
+            integrity="sha512-tMabqarPtykgDtdtSqCL3uLVM0gS1ZkUAVhRFu1vSEFgvB73niFQWJuvviDyBGBH22Lcau4rHB5p2K2T0Xvr6Q=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock %}
+
+{% block content %}
+
+    <h5>Ranking of Visited Documents</h5>
+    <canvas id="dailyVisits" width="400" height="400"></canvas>
+
+    <script>
+        // 'visited_docs' is the data coming from Python code.
+        const visits_list = {{ visited_docs | tojson | safe }};
+        console.log("visited docs: ", visits_list);
+    </script>
+
+    <script>
+        const visitsLabels = visits_list.map(a => "id: " + a.doc_id);
+        const visitsData = visits_list.map(a => a.counter);
+        const chartData1 = {
+            labels: visitsLabels,
+            datasets: [{
+                label: 'Visits count',
+                data: visitsData,
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        };
+
+        const ctx = document.getElementById('dailyVisits').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'line',
+            data: chartData1,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+    <hr>
+    <h5>Visited Documents List</h5>
+    {% for doc in visited_docs %}
+        <div class="pb-3">
+            <div>
+                <span class="text-dark">({{ doc.counter }} visits)</span> — id: {{ doc.doc_id }} — {{ doc.description }}
+            </div>
+        </div>
+        <hr>
+    {% endfor %}
+
+    <h5>Search Query Statistics</h5>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Query ID</th>
+                <th>Terms</th>
+                <th>Number of Terms</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for query_stat in query_stats %}
+            <tr>
+                <td>{{ query_stat.query_id }}</td>
+                <td>{{ query_stat.terms }}</td>
+                <td>{{ query_stat.num_terms }}</td>
+                <td>{{ query_stat.timestamp }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h5>Session Statistics</h5>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Session ID</th>
+                <th>Browser</th>
+                <th>OS</th>
+                <th>IP</th>
+                <th>Country</th>
+                <th>Start Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for session_stat in session_stats %}
+            <tr>
+                <td>{{ session_stat.session_id }}</td>
+                <td>{{ session_stat.browser }}</td>
+                <td>{{ session_stat.os }}</td>
+                <td>{{ session_stat.ip }}</td>
+                <td>{{ session_stat.country }}</td>
+                <td>{{ session_stat.start_time }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

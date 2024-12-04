@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Analytics Dashboard</title>
+</head>
+<body>
+    <h1>Web Analytics Dashboard</h1>
+
+    <h2>Query Statistics</h2>
+    <ul>
+        {% for query in analytics['queries'] %}
+        <li>Query: {{ query.query }} - Timestamp: {{ query.timestamp }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Click Statistics</h2>
+    <ul>
+        {% for click in analytics['clicks'] %}
+        <li>Document ID: {{ click.doc_id }} - Dwell Time: {{ click.dwell_time }} seconds</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Other Metrics</h2>
+    <p>Other interesting metrics (e.g., query count, document count, etc.) can be displayed here.</p>
+</body>
+</html>
